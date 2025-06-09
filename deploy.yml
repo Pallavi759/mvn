@@ -1,7 +1,8 @@
-- name: Deploy artifact
+- name: Deploy Maven Artifact
   hosts: localhost
-  become: true  # If you need sudo/root access
+  become: true  # Runs tasks with sudo
   tasks:
+
     - name: Ensure the deployment directory exists
       file:
         path: /opt/deploy
@@ -10,5 +11,7 @@
 
     - name: Copy the artifact to the deployment directory
       copy:
-        src: /var/lib/jenkins/workspace/mvn/target/HelloMaven-1.0-SNAPSHOT.jar  # Replace with actual file
+        src: /var/lib/jenkins/workspace/mvn/target/HelloMaven-1.0-SNAPSHOT.jar
         dest: /opt/deploy/ansi.jar
+        mode: '0644'
+
